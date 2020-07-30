@@ -89,7 +89,7 @@ def generate_padded_sequences(input_sequence):
 
     return predictors, labels, max_sequence_len
 
- predictors, labels, max_seq_len = generate_padded_sequences(input_sequence)
+    predictors, labels, max_seq_len = generate_padded_sequences(input_sequence)
 
  #Creating Model
 def create_model(maxSequenceLength, total_words):
@@ -103,7 +103,6 @@ def create_model(maxSequenceLength, total_words):
     # hidden: lstm layer
     model.add(LSTM(100))
     model.add(Dropout(0.1))
-
     # output layer
     model.add(Dense(total_words, activation='softmax'))
 
@@ -111,8 +110,6 @@ def create_model(maxSequenceLength, total_words):
     model.compile(loss='categorical_crossentropy', optimizer='adam')
 
     return model
-
-
 model = create_model(max_seq_len, total_words)
 model.summary()
 
@@ -124,33 +121,25 @@ def generate_text(seed_text, next_words, model, max_seq_len):
     w = 0
     for _ in range(next_words):
         token_list = tokenizer.texts_to_sequences([seed_text])[0]
-
         if w == 0:
             print(token_list)
-
         token_list = pad_sequences([token_list], maxlen=max_seq_len - 1, padding='pre')
 
         if w == 0:
             print(token_list)
 
         predicted = model.predict_classes(token_list, verbose=0)
-
         if w == 0:
             print(predicted)
-
         output_word = ''
 
         for word, index in tokenizer.word_index.items():
             if index == predicted:
                 output_word = word
                 break
-
         seed_text = seed_text + " " + output_word
-
         w = 1
-
     return seed_text.title()
-
 print(generate_text("united states", 5, model, max_seq_len))
 
 
