@@ -57,7 +57,7 @@ history=model.fit(X_train, y_train, epochs=20, verbose=True, validation_data=(xV
 Loss,Accuracy = model.evaluate(xValidity, yValidity)
 print("Loss before embedding layer :", Loss)
 print("Accuracy before adding embedding layer:",Accuracy)
-#adding an embedding layer
+#adding the embedding layer
 model1 = Sequential()
 model1.add(Embedding(len(word_index), embedding_length, input_length=max_length))
 model1.add(LSTM(100, dropout_W=0.25))

@@ -46,7 +46,7 @@ history = auto_Encoder.fit(x_train,x_train,
 
 #copying data for use in step b
 x_1train = x_train
-for a in range (0, 400000):
+for a in range(0, 400000):
     Pred = auto_Encoder.predict(x_train[a].reshape(1,2000))
 x_1test = x_copyTest()
 for j in range(0,20000):
@@ -80,7 +80,7 @@ print(x_1test.shape)
 print(x_1train.shape)
 print(y_test.shape)
 print(y_train.shape)
-
+#fitting data into encoder
 historyOne = model.fit(x_1train, y_train, validationData=(x_1test,y_test), epoch=epoch)
 scores = model.evaluate(x_1test,y_test,verbose=0)
 print("Scores: ", scores[1])
@@ -120,7 +120,8 @@ xTestPCA = pca.transform(x_test)
 xTrainPCA = pca.transform(x_train)
 xTrainPCA = x_trainPCA.reshape(32,32,3)
 xTestPCA = xTestPCA.reshape(32,32,3)
-#compiling model
+
+#compiling CNN model
 model = model.sequencial()
 model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3), kernel_contraint = maxnorm(3)))
 model.add(layers.Dropout(0.2))
@@ -135,6 +136,7 @@ learningRate = 0.05
 Decay -= learningRate /epoch
 s_Gradient=keras.optimizers.s_Gradient(lr=learningRate, Decay=Decay)
 model.compile(loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits =True), optimizer=s_Gradient,metrics=["ACC"])
+#fit xtrain and y_train into the history model.
 historyTwo = model.fit(xTrainPCA, y_train, validationData=(xTestPCA,y_test), epoch=epoch)
 scores = model.evaluate(xTestPCA,y_test,verbose = 0)
 print("Scores: ",scores[1]*100)

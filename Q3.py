@@ -17,7 +17,7 @@ from keras.preprocessing.image import imageToArray, load_Image
 import numpy as np
 from keras.constraint import maximum
 from keras.optimizers import Adam
-
+#loading dataset
 df = pd.read_csv("monkeys-labels.txt")
 print(df)
 #labels
@@ -57,7 +57,7 @@ plt.show()
 
 print(labels[4])
 image_show(3, 'n2')
-#reading data from folder
+#reading images from folder
 def read_data(path):
     images = []
     labels = []

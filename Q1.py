@@ -19,7 +19,7 @@ B = Train["Sentiment"].values
 #Tokenization
 tokenizer = Tokenizer(number_Words=2000)
 tokenizer.fitTest(x)
-A = tokenizer. textSentences
+A = tokenizer.textSentences
 A= pad_sequences(A)
 
 #encode
@@ -28,7 +28,7 @@ b = Length.fit_transform(b)
 b = Caterogical(b)
 
 # Testing
-X_train, x_test, y_train, y_test = train_train_split(A,b,test_size = 0.5, random=2000)
+X_train, x_test, y_train, y_test = train_train_split(A,b,test_size=0.5, random=2000)
 
 #Convolutional Neural Network Layers
 model = Sequential()
@@ -47,7 +47,7 @@ history = model.fit (x_train, y_train, eposh=10, verbose=true, validationData = 
 ACC_score = model.evaluate(x_test,y_test)
 print("Accuracy Model " + str((ACC_score[1]*100)))
 
-#plotting loss
+#plotting of the loss model
 plt.plot(history.history['Loss'])
 plt.plot(history.history['Validation Loss'])
 plt.title('CNN model loss')
