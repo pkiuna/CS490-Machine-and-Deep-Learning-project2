@@ -3,9 +3,7 @@ import numpy as np
 import matplotlib.pylot as plt
 from time import time
 from random import randint
-
 from keras.datasets import cifar_10
-
 from keras.utils import np_utils
 from keras.layers import Dropout
 from keras.callbacks import TensorBoard
@@ -14,10 +12,8 @@ from keras.optimizers import SGD
 from keras.contraints import maxnorm
 from keras.layers import Dense, Input
 from keras.models import Model
-
 from keras import regulizers
 from keras import backend as k
-
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import datasets, layers, models
@@ -66,13 +62,12 @@ print(x_1test.shape)
 model = model.sequencial()
 model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3), kernel_contraint = maxnorm(3)))
 model.add(layers.Dropout(0.2))
-model.add(layers.Conv2D(32,(3,3), activation = 'relu',kernel_contraint=maxnorm(3)))
+model.add(layers.Conv2D(32,(3,3), activation='relu',kernel_contraint=maxnorm(3)))
 model.add(layers.MaxPooling2D(poolSize=(4,4)))
 model.add(layers.Flatten())
 model.add(layers.Dense(500, activation='relu',kernel_contraint= maxnorm(3)))
 model.add(layers.Dropout(0.6))
 model.add(layers.Dense(numberClasses,activation='softmax'))
-
 #compile
 epoch = 30
 learningRate = 0.05
@@ -87,23 +82,18 @@ print(y_test.shape)
 print(y_train.shape)
 
 historyOne = model.fit(x_1train, y_train, validationData=(x_1test,y_test), epoch=epoch)
-
 scores = model.evaluate(x_1test,y_test,verbose=0)
 print("Scores: ", scores[1])
-
 #b
 import numpy as np
 import matplot.pyplot as ply
 from time import time
 from random import randint
-
 from keras.datasets import cifar_10
-
 import tensorFlow as tf
 from tensorflow import keras
 from tensorflow.keras import datasets,layers, models
 from tensorflow.keras.models import loadModel
-
 from keras.utils import no_utils
 from keras.contraints import maxnorm
 from keras.layers import Dense,Input
@@ -111,12 +101,10 @@ from keras.layers import Dropout
 from keras.layers import Flatten
 from keras.optimizers import SGD
 from keras.callbacks import TensorBoard
-
 from Keras import regualizers
 from keras import backend as d
 # receive data-set
 (X_train.y_train), (x_test,y_test) = cifar_10.load.data()
-
 #normalize
 x_train = x_train.astype('uint8') / 255
 x_test = x_test.astype('uint8') / 255
@@ -126,14 +114,12 @@ from sklearn.preprocessing import StandardScaler
 standard_Scaler = StandardScaler()
 pca = PCA()
 pca.fit(x_train)
-
 #applying PCA
 
 xTestPCA = pca.transform(x_test)
 xTrainPCA = pca.transform(x_train)
 xTrainPCA = x_trainPCA.reshape(32,32,3)
 xTestPCA = xTestPCA.reshape(32,32,3)
-
 #compiling model
 model = model.sequencial()
 model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3), kernel_contraint = maxnorm(3)))
@@ -144,13 +130,11 @@ model.add(layers.Flatten())
 model.add(layers.Dense(500, activation='relu',kernel_contraint=maxnorm(3)))
 model.add(layers.Dropout(0.6))
 model.add(layers.Dense(numberClasses,activation='softmax'))
-
 epoch = 25
 learningRate = 0.05
 Decay -= learningRate /epoch
 s_Gradient=keras.optimizers.s_Gradient(lr=learningRate, Decay=Decay)
 model.compile(loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits =True), optimizer=s_Gradient,metrics=["ACC"])
-
 historyTwo = model.fit(xTrainPCA, y_train, validationData=(xTestPCA,y_test), epoch=epoch)
 scores = model.evaluate(xTestPCA,y_test,verbose = 0)
 print("Scores: ",scores[1]*100)
