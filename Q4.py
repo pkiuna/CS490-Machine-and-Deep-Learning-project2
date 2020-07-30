@@ -14,12 +14,35 @@ seed(1)
 import pandas as pd
 import numpy as np
 import string, os
-
 import warnings
-warnings.filterwarnings("ignore")
-warnings.simplefilter(action='ignore', category=FutureWarning)
-currr_dir = "../input/"
-all_headlines = []
+
+import tensorflow as tf
+tf.random.set_seed(2)
+import pandas as pd
+import numpy as np
+import string, os
+
+directory = "newyork_headline.zip"
+headlines = []
+for filename in os.listdir(directory):
+    if 'Articles' in filename:
+        print(filename)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 x = 0
 
