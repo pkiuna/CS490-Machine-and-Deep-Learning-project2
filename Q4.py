@@ -79,12 +79,15 @@ def get_sequence_of_tokens(corpus):
     input_sequence, total_words = get_sequence_of_tokens(corpus)
     print(total_words)
 
-#pad sentences and make them equal
+
+    #pad sentences and make them equal
+def generate_padded_sequences(input_sequence):
     max_sequence_len = max([len(x) for x in input_sequence])
     input_sequences = np.array(pad_sequences(input_sequence, maxlen=max_sequence_len, padding='pre'))
     predictors, labels = input_sequences[:, :-1], input_sequences[:, -1]
     labels = ku.to_categorical(labels, num_classes=total_words)
-     return predictors, labels, max_sequence_len
+
+    return predictors, labels, max_sequence_len
 
  predictors, labels, max_seq_len = generate_padded_sequences(input_sequence)
 
